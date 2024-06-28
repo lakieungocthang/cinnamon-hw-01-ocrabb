@@ -1,0 +1,6 @@
+streamlit
+PIL
+io
+pytesseract
+unittest
+pre-commit
