@@ -1,14 +1,15 @@
 from abc import ABC, abstractmethod
-
+from utils.FileType import FileType
 class CustomHandler(ABC):
+    def __init__(self, type: FileType):
+        self.type = type
+
     @abstractmethod
     def process(self, file):
         pass
 
-    @abstractmethod
     def save_to_local(self, data):
         pass
 
-    @abstractmethod
     def save_to_cloud(self, data):
         pass

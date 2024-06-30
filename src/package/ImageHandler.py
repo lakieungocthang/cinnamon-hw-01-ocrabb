@@ -3,13 +3,14 @@ from PIL import Image
 import os
 import json
 from langdetect import detect
-import CustomHandler as CustomHandler
+import package.CustomHandler as CustomHandler
 
 
 
 class ImageHandler(CustomHandler.CustomHandler):
-    def __init__(self):
-        pass
+    def __init__(self, type):
+        super().__init__(type)
+
     def process(self, file):
         extracted = []
         img = Image.open(file)
@@ -51,9 +52,3 @@ class ImageHandler(CustomHandler.CustomHandler):
         for paragraph in paragraphs:
             extracted.append({'location': (paragraph["x1"], paragraph["y1"], paragraph["x2"], paragraph["y2"]), 'page': 1, 'text': paragraph["text"]})
         return extracted
-
-    def save_to_local(self, data):
-        pass
-
-    def save_to_cloud(self, data):
-        pass
