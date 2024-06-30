@@ -8,8 +8,8 @@ class CustomHandler(ABC):
     def process(self, file):
         pass
 
-    def save_to_local(self, data):
+    def save_to_local(self, raw_data, output_data):
         pass
 
-    def save_to_cloud(self, data):
+    def save_to_cloud(self, raw_data, output_data):
         pass
