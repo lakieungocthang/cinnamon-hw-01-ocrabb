@@ -6,7 +6,6 @@ from langdetect import detect
 import CustomHandler as CustomHandler
 
 
-
 class ImageHandler(CustomHandler.CustomHandler):
     def __init__(self):
         pass
@@ -50,6 +49,7 @@ class ImageHandler(CustomHandler.CustomHandler):
 
         for paragraph in paragraphs:
             extracted.append({'location': (paragraph["x1"], paragraph["y1"], paragraph["x2"], paragraph["y2"]), 'page': 1, 'text': paragraph["text"]})
+
         return (file, extracted)
 
     def save_to_local(self, data):
