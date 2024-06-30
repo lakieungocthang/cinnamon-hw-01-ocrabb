@@ -50,7 +50,7 @@ class ImageHandler(CustomHandler.CustomHandler):
 
         for paragraph in paragraphs:
             extracted.append({'location': (paragraph["x1"], paragraph["y1"], paragraph["x2"], paragraph["y2"]), 'page': 1, 'text': paragraph["text"]})
-        return extracted
+        return (file, extracted)
 
     def save_to_local(self, data):
         pass
