@@ -4,3 +4,4 @@ io
 pytesseract
 unittest
 pre-commit
+pymupdf
