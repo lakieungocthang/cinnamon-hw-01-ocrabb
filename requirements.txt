@@ -1,7 +1,8 @@
 streamlit
 PIL
-io
+langdetect
 pytesseract
 unittest
 pre-commit
 pymupdf
+docx2pdf
