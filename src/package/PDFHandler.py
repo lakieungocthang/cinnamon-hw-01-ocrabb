@@ -1,5 +1,5 @@
 import package.CustomHandler as CustomHandler
-from ImageHandler import ImageHandler
+from package.ImageHandler import ImageHandler
 import pymupdf
 
 class PDFHandler(CustomHandler.CustomHandler):
@@ -11,8 +11,7 @@ class PDFHandler(CustomHandler.CustomHandler):
         result = []
 
         # Image handler
-        imageHandler = ImageHandler()
-
+        imageHandler = ImageHandler(self.type)
         with pymupdf.open(file) as doc:
             for page_count, page in enumerate(doc):
                 pix = page.get_pixmap()
