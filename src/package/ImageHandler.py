@@ -6,7 +6,6 @@ from langdetect import detect
 import package.CustomHandler as CustomHandler
 
 
-
 class ImageHandler(CustomHandler.CustomHandler):
     def __init__(self, type):
         """
