@@ -1,8 +1,9 @@
 import streamlit as st
 from PIL import Image
-import io
 from utils.FileType import FileType
 from factory.HandlerFactory import HandlerFactory
+from package.CustomHandler import CustomHandler
+
 def main():
     st.title("File Processing App")
 
@@ -10,6 +11,9 @@ def main():
 
     if uploaded_file is not None:
         file_type = uploaded_file.type
+        handler = None
+
+        # Determine the handler based on file type
         if file_type in ["image/png", "image/jpeg"]:
             handler = HandlerFactory.create_handler(FileType.IMAGE)
             if uploaded_file is not None:
@@ -23,17 +27,19 @@ def main():
             st.error("Unsupported file type")
             return
 
-        result = handler.process(uploaded_file)
+        if handler is not None:
+            result = handler.process(uploaded_file)
 
-        # Xử lý result ở đây
+            # Save options
+            save_option = st.radio("Save output to:", ("Local", "Google Drive"))
 
-        save_option = st.radio("Save output to:", ("Local", "Google Drive"))
-
-        if st.button("Save"):
-            if save_option == "Local":
-                st.success("Saved to local successfully.")
-            elif save_option == "Google Drive":
-                st.success("Saved to Google Drive successfully.")
+            if st.button("Save"):
+                if save_option == "Local":
+                    local_path = CustomHandler(handler.type).save_to_local(result, uploaded_file)
+                    st.success(f"Saved to local successfully. File path: {local_path}")
+                elif save_option == "Google Drive":
+                    file_id = CustomHandler(handler.type).save_to_cloud(result, uploaded_file)
+                    st.success(f"Saved to Google Drive successfully. File ID: {file_id}")
 
 if __name__ == "__main__":
     main()
