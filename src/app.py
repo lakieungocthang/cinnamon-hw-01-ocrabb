@@ -35,10 +35,10 @@ def main():
 
             if st.button("Save"):
                 if save_option == "Local":
-                    local_path = CustomHandler(handler.type).save_to_local(result, uploaded_file)
+                    local_path = CustomHandler(handler.type).save_to_local(uploaded_file, result)
                     st.success(f"Saved to local successfully. File path: {local_path}")
                 elif save_option == "Google Drive":
-                    file_id = CustomHandler(handler.type).save_to_cloud(result, uploaded_file)
+                    file_id = CustomHandler(handler.type).save_to_cloud(uploaded_file, result)
                     st.success(f"Saved to Google Drive successfully. File ID: {file_id}")
 
 if __name__ == "__main__":
