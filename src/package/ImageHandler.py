@@ -11,7 +11,7 @@ class ImageHandler(CustomHandler.CustomHandler):
     def __init__(self, type):
         super().__init__(type)
 
-    def process(self, file):
+    def process(self, file, page=1):
         extracted = []
         img = Image.open(file)
 
@@ -50,5 +50,5 @@ class ImageHandler(CustomHandler.CustomHandler):
             paragraphs.append(current_paragraph)
 
         for paragraph in paragraphs:
-            extracted.append({'location': (paragraph["x1"], paragraph["y1"], paragraph["x2"], paragraph["y2"]), 'page': 1, 'text': paragraph["text"]})
-        return (file, extracted)
+            extracted.append({'location': (paragraph["x1"], paragraph["y1"], paragraph["x2"], paragraph["y2"]), 'page': page, 'text': paragraph["text"]})
+        return {'raw':file, 'processed':extracted}
