@@ -8,6 +8,7 @@ from googleapiclient.http import MediaIoBaseUpload, MediaFileUpload
 
 from utils.FileType import FileType
 
+SAVE_PATH = './saved_files'
 class CustomHandler(ABC):
     def __init__(self, type: FileType):
         self.type = type
@@ -19,13 +20,13 @@ class CustomHandler(ABC):
     def save_to_local(self, raw_data, output_data):
         filename = raw_data['filename']
         json_data = json.dumps(output_data, indent=4)
-
-        local_path = os.path.join('./saved_files', f'{filename}.json')
+        os.makedirs(SAVE_PATH, exist_ok=True)
+        local_path = os.path.join(SAVE_PATH, f'{filename}.json')
         with open(local_path, 'w') as f:
             f.write(json_data)
 
         if 'images' in raw_data:
-            images_dir = os.path.join('./saved_files', f'{filename}_images')
+            images_dir = os.path.join(SAVE_PATH, f'{filename}_images')
             os.makedirs(images_dir, exist_ok=True)
             for idx, image in enumerate(raw_data['images'], start=1):
                 image_path = os.path.join(images_dir, f'image_{idx}.png')
@@ -60,7 +61,7 @@ class CustomHandler(ABC):
         print(f'File ID: {file.get("id")}')
 
         if 'images' in raw_data:
-            images_dir = os.path.join('./saved_files', f'{filename}_images')
+            images_dir = os.path.join(SAVE_PATH, f'{filename}_images')
             os.makedirs(images_dir, exist_ok=True)
             for idx, image in enumerate(raw_data['images'], start=1):
                 image_path = os.path.join(images_dir, f'image_{idx}.png')
